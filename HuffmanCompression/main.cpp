@@ -113,7 +113,7 @@ class Huffman {
 };
 
 int main(int argc, char** argv) {
-	string mode;
+  string mode;
 	Huffman h;
     
 	ifstream inFile("compressed.txt");
@@ -122,20 +122,20 @@ int main(int argc, char** argv) {
 	if (inFile.fail()) { exit(1); }
 	if (outFile.fail()) { exit(1); }
 
-	cout << "Enter mode: ";
+  cout << "Enter mode: ";
 	cin >> mode;
     
 	if (mode == "-e") {
-		h.expand(inFile, outFile);
+    h.expand(inFile, outFile);
 		outFile.close();
 		string data;
 		ifstream in("output.txt");
 		while (!in.eof()) {
-			in >> data;
+      in >> data;
 			cout << data;
 		}
-	} else if (mode == "-c") {
-        cout << "Compression is not available.";
+  } else if (mode == "-c") {
+      cout << "Compression is not available.";
 	}
     
 	inFile.close();
