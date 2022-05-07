@@ -91,11 +91,11 @@ class Huffman {
       out << false;
       writeTrie(x->get_left(), out);
       writeTrie(x->get_right(), out);
-	}
-  void expand(ifstream& in, ostream& out) {
-    shared_ptr<Node> root = readTrie(in);
-    bitset<1> bit;
-    while (in >> bit) {
+    }
+    void expand(ifstream& in, ostream& out) {
+      shared_ptr<Node> root = readTrie(in);
+      bitset<1> bit;
+     while (in >> bit) {
       shared_ptr<Node> x = root;
       while (!x->isLeaf()) {
         if (bit.none()) {
@@ -106,9 +106,10 @@ class Huffman {
         if (!x->isLeaf()) {
           in >> bit;
         }
+      }
     }
     out << x->get_val();
-  }
+    }
 };
 
 int main(int argc, char** argv) {
