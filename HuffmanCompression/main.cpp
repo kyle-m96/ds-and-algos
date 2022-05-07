@@ -48,10 +48,11 @@ class Huffman {
     shared_ptr<Node> buildTrie() {
       priority_queue<shared_ptr<Node>, vector<shared_ptr<Node>>, compare<shared_ptr<Node>>> pq;
       shared_ptr<Node> z;
-      for (int i=0; i<R; i++)
+      for (int i=0; i<R; i++) {
         if (freq[i] > 0) {
           pq.push(make_shared<Node>(i, freq[i], nullptr, nullptr));
         }
+      }
 
       while (pq.size() > 1) {
         shared_ptr<Node> x = pq.top();
@@ -97,16 +98,16 @@ class Huffman {
 			while (in >> bit) {
 				shared_ptr<Node> x = root;
 				while (!x->isLeaf()) {
-						if (bit.none()) {
-							x = x->get_left();
-						} else {
-							x = x->get_right();
-						}
-						if (!x->isLeaf()) {
-							in >> bit;
-						}
-				}
-				out << x->get_val();
+          if (bit.none()) {
+            x = x->get_left();
+          } else {
+            x = x->get_right();
+          }
+          if (!x->isLeaf()) {
+            in >> bit;
+          }
+      }
+      out << x->get_val();
 		}
 	}
 };
