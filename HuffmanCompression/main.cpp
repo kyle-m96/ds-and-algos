@@ -34,7 +34,7 @@ class Node {
     shared_ptr<Node> get_left() { return left; }
     shared_ptr<Node> get_right() { return right; }
     int get_freq() { return freq; }
-}
+};
 
 class Huffman {
   private:
@@ -95,19 +95,19 @@ class Huffman {
     void expand(ifstream& in, ostream& out) {
       shared_ptr<Node> root = readTrie(in);
       bitset<1> bit;
-     while (in >> bit) {
-      shared_ptr<Node> x = root;
-      while (!x->isLeaf()) {
-        if (bit.none()) {
-          x = x->get_left();
-        } else {
+      while (in >> bit) {
+        shared_ptr<Node> x = root;
+        while (!x->isLeaf()) {
+          if (bit.none()) {
+            x = x->get_left();
+          } else {
           x = x->get_right();
-        }
-        if (!x->isLeaf()) {
-          in >> bit;
+					}
+          if (!x->isLeaf()) {
+            in >> bit;
+          }
         }
       }
-    }
     out << x->get_val();
     }
 };
