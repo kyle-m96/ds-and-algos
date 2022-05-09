@@ -1,4 +1,6 @@
-#include "GraphType.h"
+#include "w_edge.h"
+#include "we_graph.h"
+#include "prim_mst_lz.h"
 #include <iostream>
 
 using namespace std;
