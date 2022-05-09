@@ -50,16 +50,73 @@ public:
     // Write a weighted edge to an output stream
 };
 
+// Default constructor
 w_edge::w_edge() {
     this->v = -1;
     this->w = -1;
     this->cost = 0;
 }
 
-w_edge:w_edge(const unsigned int &a,
+// Constructor
+w_edge::w_edge(const unsigned int &a,
               const unsigned int &b, const double &c) {
     v = a;
     w = b;
     cost = c;
 }
 
+// Get methods
+unsigned int w_edge::get_v() { return v; }
+unsigned int w_edge::get_v() const { return v; }
+unsigned int w_edge::get_w() { return w; }
+unsigned int w_edge::get_w() const { return w; }
+double w_edge::get_cost() const { return cost; }
+
+// Set methods
+void w_edge::set_v(unsigned int v) { this->v = v; }
+void w_edge::set_w(unsigned int w) { this->w = w; }
+void w_edge::set_cost(double cost) { this-> cost = cost; }
+
+// Returns a vertex
+unsigned int w_edge::either() { return v; }
+unsigned int w_edge::other(unsigned int a) {
+    if (v == a) { return w; }
+    else { return v; }
+}
+
+// Overload operators
+bool w_edge::operator<(const w_edge e) const {
+    return (cost < e.get_cost());
+}
+
+bool w_edge::operator>(const w_edge e) const {
+    return (cost > e.get_cost());
+}
+
+ostream & operator<<(ostream &cout, w_edge e) {
+    cout << e.get_v() << "->" << e.get_w();
+    return cout;
+}
+
+ifstream & operator>>(ifstream &fin, w_edge &e) {
+    unsigned int end_pt1, end_pt2;
+    double cost;
+    
+    if (fin >> end_pt1) {
+        e.set_v(end_pt1);
+        if (fin >> end_pt2) {
+            e.set_w(end_pt2);
+            if (fin >> cost) {
+                e.set_cost(cost);
+            } else {
+                cout << "Error: no weight provided for edge (" << end_pt1
+                    << "," << end_pt2 << ")" << endl;
+                exit(1);
+            }
+        } else {
+            cout << "Error: no end point for edge with left vertex " << end_pt1 << endl;
+            exit(1);
+        }
+    }
+    return fin;
+}
